@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://digitalocean.devpost.com/"><img src="https://img.shields.io/badge/DO_Gradient_AI_Hackathon_2026-0080FF?style=for-the-badge&logo=digitalocean&logoColor=white" alt="DO Hackathon"/></a>
+  <a href="https://mentorflow-ai-213455-3krpu.ondigitalocean.app"><img src="https://img.shields.io/badge/🔗_Live_Demo-mentorflow-ai-213455-3krpu.ondigitalocean.app-00C853?style=for-the-badge&logo=digitalocean&logoColor=white" alt="Live Demo"/></a>
   <img src="https://img.shields.io/badge/AI-Powered-blueviolet?style=for-the-badge" alt="AI Powered"/>
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
   <img src="https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"/>
