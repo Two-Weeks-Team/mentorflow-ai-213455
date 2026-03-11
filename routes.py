@@ -12,7 +12,7 @@ class PlanRequest(BaseModel):
 
 class PlanResponse(BaseModel):
     summary: str
-    items: List[str]
+    items: list[dict[str, object]]
     score: float
     note: str | None = None
 
@@ -21,7 +21,7 @@ class InsightsRequest(BaseModel):
     context: str
 
 class InsightsResponse(BaseModel):
-    insights: str
+    insights: list[str]
     next_actions: List[str]
     highlights: List[str]
     note: str | None = None
@@ -29,7 +29,7 @@ class InsightsResponse(BaseModel):
 @router.post("/plan", response_model=PlanResponse)
 async def generate_plan(req: PlanRequest):
     messages = [
-        {"role": "system", "content": "You are a concise coaching plan generator. Return JSON with keys: summary (string), items (list of strings), score (float)."},
+        {"role": "system", "content": "You are a concise coaching plan generator. Return JSON with keys: summary (string), items (list of objects with title, detail, score), score (float)."},
         {"role": "user", "content": f"Generate a plan for: {req.query}. Preferences: {', '.join(req.preferences)}"}
     ]
     result = await call_inference(messages)
@@ -46,7 +46,7 @@ async def generate_plan(req: PlanRequest):
 @router.post("/insights", response_model=InsightsResponse)
 async def generate_insights(req: InsightsRequest):
     messages = [
-        {"role": "system", "content": "You are an insights extractor for coaching selections. Return JSON with keys: insights (string), next_actions (list of strings), highlights (list of strings)."},
+        {"role": "system", "content": "You are an insights extractor for coaching selections. Return JSON with keys: insights (list of strings), next_actions (list of strings), highlights (list of strings)."},
         {"role": "user", "content": f"Selection: {req.selection}. Context: {req.context}. Provide insights."}
     ]
     result = await call_inference(messages)
