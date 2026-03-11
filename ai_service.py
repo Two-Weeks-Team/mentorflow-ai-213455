@@ -19,29 +19,35 @@ def _extract_json(text: str) -> str:
 
 def _coerce_unstructured_payload(raw_text: str) -> dict[str, object]:
     compact = raw_text.strip()
-    normalized = compact.replace("\n", ",")
-    tags = [part.strip(" -•\t") for part in normalized.split(",") if part.strip(" -•\t")]
-    if not tags:
-        tags = ["guided plan", "saved output", "shareable insight"]
-    headline = tags[0].title()
-    items = []
-    for index, tag in enumerate(tags[:3], start=1):
-        items.append({
-            "title": f"Stage {index}: {tag.title()}",
-            "detail": f"Use {tag} to move the request toward a demo-ready outcome.",
-            "score": min(96, 80 + index * 4),
-        })
-    highlights = [tag.title() for tag in tags[:3]]
+    subject = compact if compact and compact.lower() != "ai service fallback" else "a visible growth roadmap"
+    items = [
+        {
+            "title": "Focus lane: capability map",
+            "detail": f"Turn {subject} into a concrete capability ladder with one skill theme, one confidence theme, and one proof artifact.",
+            "score": 84,
+        },
+        {
+            "title": "Feedback loop: weekly ritual",
+            "detail": "Define a repeatable cadence for mentor check-ins, async feedback, and one measurable experiment each week.",
+            "score": 88,
+        },
+        {
+            "title": "Proof lane: visible progress",
+            "detail": "Package the strongest output into a portfolio slice, retro note, or stakeholder-ready update that proves momentum.",
+            "score": 92,
+        },
+    ]
+    highlights = ["Weekly ritual", "Visible proof", "Career momentum"]
     return {
         "note": "Model returned plain text instead of JSON",
         "raw": compact,
         "text": compact,
-        "summary": compact or f"{headline} fallback is ready for review.",
-        "tags": tags[:6],
+        "summary": f"MentorFlow converted {subject} into a clear coaching roadmap with visible next steps.",
+        "tags": ["coaching roadmap", "visible progress", "habit loop"],
         "items": items,
         "score": 88,
-        "insights": [f"Lead with {headline} on the first screen.", "Keep one clear action visible throughout the flow."],
-        "next_actions": ["Review the generated plan.", "Save the strongest output for the demo finale."],
+        "insights": ["Start with the capability gap so the user sees what changes first.", "Keep one concrete proof artifact attached to every milestone."],
+        "next_actions": ["Save the roadmap as the active coaching path.", "Turn the first milestone into a one-week experiment."],
         "highlights": highlights,
     }
 
