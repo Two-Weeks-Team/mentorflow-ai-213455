@@ -26,7 +26,7 @@ class InsightsResponse(BaseModel):
     highlights: List[str]
     note: str | None = None
 
-@router.post("/api/plan", response_model=PlanResponse)
+@router.post("/plan", response_model=PlanResponse)
 async def generate_plan(req: PlanRequest):
     messages = [
         {"role": "system", "content": "You are a concise coaching plan generator. Return JSON with keys: summary (string), items (list of strings), score (float)."},
@@ -43,7 +43,7 @@ async def generate_plan(req: PlanRequest):
         db.close()
     return result
 
-@router.post("/api/insights", response_model=InsightsResponse)
+@router.post("/insights", response_model=InsightsResponse)
 async def generate_insights(req: InsightsRequest):
     messages = [
         {"role": "system", "content": "You are an insights extractor for coaching selections. Return JSON with keys: insights (string), next_actions (list of strings), highlights (list of strings)."},
